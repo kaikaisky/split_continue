@@ -1,16 +1,28 @@
-#Read file.csv
-health = []
-with open('/home/shikai/Desktop/codig/health2.csv', 'r', encoding= 'utf-8')as f:
-    for person in f:
-        if '姓名, 身高' in person:
-            continue  #＃如果這字串有存在於這一行的話, 就執行continue, 這一迴圈的下面內容跳過
+import  os
 
-        name, height = person.strip().split(',') #split(‘,’) 遇到逗號就切割開來
-                                      #strip() 會移除首行尾的空白及換行符號
-        health.append([name, height])
-        print([name])
-print(health)
-print(health[1][1])
+health = []
+if  os.path.isfile('/home/shikai/Desktop/codig/health2.csv'): #＃os這個模組的path 模組的 iffile 功能,檢查檔案存在與否
+    print('Get file')
+    #Read file.csv
+    with open('/home/shikai/Desktop/codig/health2.csv', 'r', encoding= 'utf-8')as f:
+        for person in f:
+            if '姓名, 身高' in person:
+                continue  #＃如果這字串有存在於這一行的話, 就執行continue, 這一迴圈的下面內容跳過
+
+            name, height = person.strip().split(',') #split(‘,’) 遇到逗號就切割開來
+                                        #strip() 會移除首行尾的空白及換行符號
+            health.append([name, height])
+            print([name])
+    print(health)
+    print(health[1][1])
+else:
+    print('File is not found')
+
+
+
+
+
+
         
 
 #請輸入你的名字
@@ -32,7 +44,7 @@ for person in health: #health 大清單 用person 這個變數讀取每一小組
     if  person[1] > 180: #Person[0] 表示Health 大清單裡面的所有小清單的第1個, 就是名字
         print('Hi,', person[0], 'Your height is', person[1], '. Do you want to join basketball team?')
     else:
-        print('Thanks for your help')
+        print('Hi,', person[0], 'Thanks for your help')
 
 
 #寫入檔案, 如果是要寫中文, 編碼部份設定為utf-8
